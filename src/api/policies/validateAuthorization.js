@@ -15,8 +15,10 @@ module.exports = function (request, reply, next) {
     const environmentId = request.params.environment_id;
     const fileId = request.params.file_id;
 
-    const fileKey = ACLService.getFileKey(environmentId, fileId);
-    const environmentKey = ACLService.getEnvironmentKey(environmentId);
+    const fileReadKey = ACLService.getFileReadKey(environmentId, fileId);
+    const fileWriteKey = ACLService.getFileWriteKey(environmentId, fileId);
+    const environmentReadKey = ACLService.getEnvironmentReadKey(environmentId);
+    const environmentWriteKey = ACLService.getEnvironmentWriteKey(environmentId);
     const systemReadKey = ACLService.getSystemReadKey();
     const systemWriteKey = ACLService.getSystemWriteKey();
 
@@ -26,12 +28,14 @@ module.exports = function (request, reply, next) {
     }
 
     // If environmentId is provided, check if the user has access to the environment
-    if (environmentId && !permissions[environmentKey]) {
-      return reply.code(403).send({ success: false, result: "Forbidden" });
+    if (environmentId && !permissions[environmentReadKey]) {
+      return reply.code(403).send({ success: false, result: "Forbidden env" });
     }
 
+    // @TODO Implement this for write operations based on method etc.
+
     // If fileId is provided, check if the user has access to the file
-    if (fileId && !permissions[fileKey]) {
+    if (fileId && !permissions[fileReadKey]) {
       return reply.code(403).send({ success: false, result: "Forbidden" });
     }
 

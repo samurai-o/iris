@@ -59,3 +59,26 @@ nvm use
 npm start
 ```
 
+## File Structure
+
+The project is organized as follows:
+
+```
+/iris
+│
+├── /src
+│   ├── /controllers
+│   │   └── fileController.js  # Handles file upload, download, and management logic
+│   ├── /models
+│   │   └── fileModel.js       # Defines the data schema and interactions with PostgreSQL
+│   ├── /routes
+│   │   └── fileRoutes.js      # Defines API endpoints and routes
+│   ├── /services
+│   │   └── storageService.js  # Interfaces with Azure Blob for file storage
+│   └── app.js                 # Main application entry point
+│
+├── /config
+│   └── config.js              # Configuration settings for the application
+│
+└── package.json               # Project metadata and dependencies
+```

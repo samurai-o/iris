@@ -14,6 +14,9 @@ function getFakeUser(username) {
     id: 1,
     email: 'drummer.sivcan@gmail.com',
     username: 'Sivcan',
+    roles: ['Environment Admin'],
+    // roles: ['Full Visibility'],
+    organizationId: 1,
     environments: [1, 2, 3],
     password: bcrypt.hashSync('aptible-test-user-0x', 10)
   };
