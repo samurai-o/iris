@@ -6,6 +6,8 @@ const FAKE_TEMP_USER = {
   id: 1,
   email: 'drummer.sivcan@gmail.com',
   username: 'Sivcan',
+  environments: [1, 2, 3],
+  roles: ['admin', 'user'],
   password: bcrypt.hashSync('aptible-test-user-0x', 10)
 };
 

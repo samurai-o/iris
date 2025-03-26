@@ -16,6 +16,8 @@ module.exports = {
         id: user.id,
         email: user.email,
         username: user.username,
+        environments: user.environments,
+        roles: user.roles,
       },
       SECRET_KEY,
       {

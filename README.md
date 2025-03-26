@@ -25,7 +25,7 @@ This covers the foundational blocks for secure and scalable object storage, whil
 ---
 
 ## Next Improvements
-
+- Recovery mechanisms using queues for failures of file upload.
 
 
 ---

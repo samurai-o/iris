@@ -13,7 +13,10 @@ module.exports = require('env-lift').load('S', {
   },
   azure: {
     storage: {
-      connectionString: null
+      connectionString: process.env.AZURE_CONNECTION_STRING || null,
+      containers: {
+        iris: 'iris'
+      }
     }
   },
 });
