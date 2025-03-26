@@ -29,8 +29,6 @@ module.exports = {
         });
       }
 
-      console.log({ files });
-
       // Start a transaction
       transaction = await TransactionService.start();
 
@@ -59,25 +57,21 @@ module.exports = {
 
           // @TODO - Build recovery and failure mechanisms if the file upload fails 
 
-          console.log('=========>', { id: fileJob.id, uploadResult });
-
           // Update the file with the file URL and the status
-          await FileRepository.update(
+          const updatedFileJob = await FileRepository.update(
             {
               data: {
                 status: FileJobStatuses.SUCCESS,
-                // file_uri: uploadResult.uri,
+                file_uri: uploadResult.uri,
               },
               where: { id: fileJob.id },
             },
             transaction
           );
 
-          return { ...fileJob.toJSON(), file: fileName };
+          return updatedFileJob;
         })
       );
-
-      console.log({ fileJobs });
 
       // Commit the transaction
       await TransactionService.commit(transaction);
@@ -95,4 +89,28 @@ module.exports = {
       });
     }
   },
+
+  /**
+   * Get a file
+   * 
+   * @param {Object} req - Fastify request object
+   * @param {Object} reply - Fastify reply object
+   */
+  getFile: async function (req, reply) {
+    const { environment_id, file_id } = req.params;
+
+    const file = await FileRepository.findById(file_id);
+
+    if (!file) {
+      return reply.code(404).send({
+        success: false,
+        result: "File not found",
+      });
+    }
+
+    return reply.code(200).send({
+      success: true,
+      result: file,
+    });
+  }
 };

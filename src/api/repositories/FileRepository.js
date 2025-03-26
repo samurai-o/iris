@@ -25,6 +25,18 @@ module.exports = {
   },
 
   /**
+   * Find all file records
+   *
+   * @param {Object} clause - clause for which file needs to be found
+   * @returns {Promise}
+   */
+  findAll: async function (clause, opts) {
+    const File = getModel("File");
+
+    return File.findAll(clause, opts);
+  },
+
+  /**
    * Find a file record by ID
    *
    * @param {Number} id - ID of the file
@@ -68,9 +80,12 @@ module.exports = {
       );
     }
 
-    return File.update(record.data, {
+    await File.update(record.data, {
       where: record.where,
       transaction: transaction,
     });
+
+    // Fetch and return the updated record
+    return File.findOne({ where: record.where, transaction: transaction });
   },
 };

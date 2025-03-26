@@ -16,8 +16,14 @@ module.exports = function (fastify, options, next) {
 
   // Files routes
   fastify.post("/files/:environment_id/upload", {
-    preHandler: [policies.validateAccessToken],
+    preHandler: [policies.validateAccessToken, policies.validateAuthorization],
     handler: FileController.uploadFiles
+  });
+
+  // Files routes
+  fastify.get("/files/:environment_id/:file_id", {
+    preHandler: [policies.validateAccessToken, policies.validateAuthorization],
+    handler: FileController.getFile
   });
 
   next();

@@ -25,6 +25,9 @@ This covers the foundational blocks for secure and scalable object storage, whil
 ---
 
 ## Next Improvements
+- Address the multiple problems with the current ACL implementation.
+- Add support for building a role based access control model, to map the permissions to the roles.
+- Improve the RBAC model to be fast with JWT -> Redis -> Distributed cache scaling etc.
 - Recovery mechanisms using queues for failures of file upload.
 
 
