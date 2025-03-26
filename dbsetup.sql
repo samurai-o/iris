@@ -1,0 +1,12 @@
+-- File table
+CREATE TABLE file (
+  id SERIAL PRIMARY KEY,
+  file_uri VARCHAR,
+  file_name VARCHAR,
+  status VARCHAR NOT NULL DEFAULT 'PENDING',
+  error_message VARCHAR,
+  uploader_id INTEGER,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
